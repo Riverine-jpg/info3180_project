@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<h1 class="page-header">Properties</h1>
+{% include 'flash_messages.html' %}
+
+<div class="pcontainer">
+    <img class = "pimage" src="{{url_for('get_image',id=prop.id)}}" alt="{{prop.ptitle}}" />
+    <h2 class="pvtitle">{{prop.ptitle}}</h2>
+    <div class="prtype">
+        <p class="pvprice">${{prop.price}}</p>
+        <p class="pvtype">{{prop.ptype}}</p>
+    </div>
+    <p class="pvdesc">{{prop.desc}}</p>
+    <div class="rbth">
+        <p class="pvrooms">{{prop.rooms}} Bedrooms</p>
+        <p class="pvbrooms">{{prop.brooms}} Bathrooms</p>
+    </div>
+    <p class="pvloc">{{prop.locat}}</p>
+    <button class="pveml">Email Realtor</button>
+</div>
+
+
+{% endblock %}

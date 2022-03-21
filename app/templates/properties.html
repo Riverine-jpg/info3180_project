@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<h1 class="page-header">Properties</h1>
+{% include 'flash_messages.html' %}
+
+<ul class = "filel">
+    {%for i in prop%}
+        <li class = "pcard">
+            <img class = "pimage" src="{{url_for('get_image',id=i.id)}}" alt="{{i}}" />
+            <h2 class = "ptitle">{{i.ptitle}}</h2>
+            <h3 class = "ploc">{{i.locat}}</h3>
+            <a class="pbut" href="{{url_for('oneprop',id = i.id)}}">${{i.price}}</a>
+        </li>
+    {%endfor%}
+</ul>
+
+
+{% endblock %}

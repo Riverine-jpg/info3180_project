@@ -4,12 +4,13 @@ Jinja2 Documentation:    https://jinja.palletsprojects.com/
 Werkzeug Documentation:  https://werkzeug.palletsprojects.com/
 This file creates your application.
 """
-
+import os
 from app import app
-from flask import render_template, request, redirect, url_for,flash
+from flask import render_template, request, redirect, url_for,flash,send_from_directory
 from .forms import PropForm
 from werkzeug.utils import secure_filename
 from app.models import Properties
+from . import db
 ###
 # Routing for your application.
 ###
@@ -29,16 +30,34 @@ def about():
 def create():
     form = PropForm()
     if request.method =='POST':
+        print("ydadadsaes")
+        print(form.validate_on_submit())
         if form.validate_on_submit():
+            print("yes")
             filename = secure_filename(form.photo.data.filename)
-            form.photo.data.save(app.config['UPLOAD_FOLDER'] + filename)
+            form.photo.data.save(app.config['UPLOAD_FOLDER'] + '/' + filename)
+            property = Properties(form.ptitle.data,form.desc.data,form.rooms.data,form.brooms.data,form.price.data,form.ptype.data,form.locat.data,filename)
+            db.session.add(property)
+            db.session.commit()
             flash("works", "Success")
+            
             return redirect(url_for('home'))
     return render_template("create.html",form=form)
 
 @app.route('/properties')
 def properties():
-    return render_template('properties.html')
+    return render_template('properties.html',get_image= get_image,prop = Properties.query.all())
+
+@app.route('/properties/<id>')
+def oneprop(id):
+    return render_template("pview.html", prop = Properties.query.filter_by(id=id).first())
+
+@app.route('/pimages/<id>')
+def get_image(id):
+    prop = Properties.query.filter_by(id=id).first()
+    print(prop)
+    return send_from_directory(os.path.join(os.getcwd(),app.config['UPLOAD_FOLDER']), path=prop.photo)
+    
 
 ###
 # The functions below should be applicable to all Flask apps.

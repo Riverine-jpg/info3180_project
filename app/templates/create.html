@@ -4,7 +4,7 @@
 <div class = "container">
     <h2 class="title">Add New Property</h2>
     <hr>
-    <form method="POST" action="{{ url_for('create') }}" class = "formc">
+    <form method="POST" enctype="multipart/form-data" action="{{ url_for('create') }}" class = "formc" >
         {{ form.csrf_token }}
         <ul class="formstf">
             <li class="form-field">
@@ -58,6 +58,9 @@
             <li class="form-field">
                 <label>{{ form.photo.name }} <span class="required">*</span></label>
                 {{ form.photo(class_="photofld") }}
+                {% if form.photo.errors %}
+                    {{form.photo.errors[0]}}
+                {% endif %}
             </li>
 
             <li class="form-field">
@@ -67,10 +70,13 @@
                     {{form.brooms.errors[0]}}
                 {% endif %}
             </li>
-            
+            {{form.submit}}
 
             <button type="submit">Submit</button>
         </ul>
+        {% if form.errors %}
+{{ form.errors }}
+{% endif %}
     </form>
   </div>
 {% endblock %}
