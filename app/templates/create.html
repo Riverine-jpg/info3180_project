@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class = "container">
+    <h2 class="title">Add New Property</h2>
+    <hr>
+    <form method="POST" action="{{ url_for('create') }}" class = "formc">
+        {{ form.csrf_token }}
+        <ul class="formstf">
+            <li class="form-field">
+                <label>{{ form.ptitle.name }} <span class="required">*</span></label>
+                {{ form.ptitle(class_="namefld") }}
+                {% if form.ptitle.errors %}
+                    {{form.ptitle.errors[0]}}
+                {% endif %}
+            </li>
+
+            <li class="form-field">
+                <label>{{ form.desc.name }} <span class="required">*</span></label>
+                {{ form.desc(class_="descfld") }}
+                {% if form.desc.errors %}
+                    {{form.desc.errors[0]}}
+                {% endif %}
+            </li>
+
+            <li class="form-field">
+                <label>{{ form.rooms.name }} <span class="required">*</span></label>
+                {{ form.rooms(class_="roomfld") }}
+                {% if form.rooms.errors %}
+                    {{form.rooms.errors[0]}}
+                {% endif %}
+            </li>
+
+            <li class="form-field">
+                <label>{{ form.price.name }} <span class="required">*</span></label>
+                {{ form.price(class_="pricefld") }}
+                {% if form.price.errors %}
+                    {{form.price.errors[0]}}
+                {% endif %}
+            </li>
+
+            <li class="form-field">
+                <label>{{ form.ptype.name }} <span class="required">*</span></label>
+                {{ form.ptype(class_="ptypefld") }}
+                {% if form.ptype.errors %}
+                    {{form.ptype.errors[0]}}
+                {% endif %}
+            </li>
+
+            <li class="form-field">
+                <label>{{ form.locat.name }} <span class="required">*</span></label>
+                {{ form.locat(class_="locatfld") }}
+                {% if form.locat.errors %}
+                    {{form.locat.errors[0]}}
+                {% endif %}
+            </li>
+
+            <li class="form-field">
+                <label>{{ form.photo.name }} <span class="required">*</span></label>
+                {{ form.photo(class_="photofld") }}
+            </li>
+
+            <li class="form-field">
+                <label>{{ form.brooms.name }} <span class="required">*</span></label>
+                {{ form.brooms(class_="broomsfld")}}
+                {% if form.brooms.errors %}
+                    {{form.brooms.errors[0]}}
+                {% endif %}
+            </li>
+            
+
+            <button type="submit">Submit</button>
+        </ul>
+    </form>
+  </div>
+{% endblock %}

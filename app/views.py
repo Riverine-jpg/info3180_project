@@ -6,9 +6,10 @@ This file creates your application.
 """
 
 from app import app
-from flask import render_template, request, redirect, url_for
-
-
+from flask import render_template, request, redirect, url_for,flash
+from .forms import PropForm
+from werkzeug.utils import secure_filename
+from app.models import Properties
 ###
 # Routing for your application.
 ###
@@ -24,6 +25,20 @@ def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
 
+@app.route('/properties/create',methods=['POST', 'GET'])
+def create():
+    form = PropForm()
+    if request.method =='POST':
+        if form.validate_on_submit():
+            filename = secure_filename(form.photo.data.filename)
+            form.photo.data.save(app.config['UPLOAD_FOLDER'] + filename)
+            flash("works", "Success")
+            return redirect(url_for('home'))
+    return render_template("create.html",form=form)
+
+@app.route('/properties')
+def properties():
+    return render_template('properties.html')
 
 ###
 # The functions below should be applicable to all Flask apps.
