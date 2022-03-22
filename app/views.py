@@ -41,7 +41,7 @@ def create():
             db.session.commit()
             flash("works", "Success")
             
-            return redirect(url_for('home'))
+            return render_template('properties.html',get_image= get_image,prop = Properties.query.all())
     return render_template("create.html",form=form)
 
 @app.route('/properties')

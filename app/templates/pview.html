@@ -1,24 +1,36 @@
 {% extends 'base.html' %}
 
 {% block main %}
-<h1 class="page-header">Properties</h1>
+<h1 class="page-header">Property</h1>
 {% include 'flash_messages.html' %}
 
-<div class="pcontainer">
-    <img class = "pimage" src="{{url_for('get_image',id=prop.id)}}" alt="{{prop.ptitle}}" />
-    <h2 class="pvtitle">{{prop.ptitle}}</h2>
-    <div class="prtype">
-        <p class="pvprice">${{prop.price}}</p>
-        <p class="pvtype">{{prop.ptype}}</p>
+<div class="card mb-3" >
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img src="{{url_for('get_image',id=prop.id)}}" class="card-img" alt="{{prop.ptitle}}">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+            <h5 class="card-title">{{prop.ptitle}}</h5>
+            <div class = "tags">
+                <span class="tag">${{prop.price}}</span>
+                <span class="tag">{{prop.ptype}}</span>
+            </div>
+            
+            <p class="card-text">{{prop.desc}}</p>
+            <div class="rbth">
+                <span class="tag">{{prop.rooms}} Bedrooms</span>
+                <span class="tag">{{prop.brooms}} Bathrooms</span>
+            </div>
+            <span class="tag">{{prop.locat}}</span>
+            <div class = "bhold">
+                <button class="pbut">Email Realtor</button>
+            </div>
+            
+        </div>
+      </div>
     </div>
-    <p class="pvdesc">{{prop.desc}}</p>
-    <div class="rbth">
-        <p class="pvrooms">{{prop.rooms}} Bedrooms</p>
-        <p class="pvbrooms">{{prop.brooms}} Bathrooms</p>
-    </div>
-    <p class="pvloc">{{prop.locat}}</p>
-    <button class="pveml">Email Realtor</button>
-</div>
+  </div>
 
 
 {% endblock %}

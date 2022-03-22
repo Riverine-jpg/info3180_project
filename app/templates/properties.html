@@ -4,13 +4,29 @@
 <h1 class="page-header">Properties</h1>
 {% include 'flash_messages.html' %}
 
-<ul class = "filel">
+<ul class = "plist">
     {%for i in prop%}
         <li class = "pcard">
-            <img class = "pimage" src="{{url_for('get_image',id=i.id)}}" alt="{{i}}" />
-            <h2 class = "ptitle">{{i.ptitle}}</h2>
-            <h3 class = "ploc">{{i.locat}}</h3>
-            <a class="pbut" href="{{url_for('oneprop',id = i.id)}}">${{i.price}}</a>
+
+            <div class="card">
+                <img class = "pimage" src="{{url_for('get_image',id=i.id)}}" alt="{{i}}" />
+          
+                <!-- A div with card__details class to hold the details in the card  -->
+                <div class="card__details">
+          
+                  <!-- Span with tag class for the tag -->
+                    
+                  <!-- A div with name class for the name of the card -->
+                  <div class="pname">{{i.ptitle}}</div>
+          
+                  <p class = "plocat">{{i.locat}}</p>
+
+                  <span class="tag">${{i.price}}</span>
+          
+                  <a class="pbut" href="{{url_for('oneprop',id = i.id)}}">Learn more</a>
+                </div>
+            </div>
+
         </li>
     {%endfor%}
 </ul>

@@ -10,7 +10,7 @@ class PropForm(FlaskForm):
     ptitle = StringField("Property Title", validators=[DataRequired()],name = "Property Title")
     desc = TextAreaField("Description", validators=[DataRequired()],name="Description")
     rooms = IntegerField("Number of Rooms", validators=[DataRequired()],name="Number of Rooms")
-    brooms = IntegerField("Number of BathRooms", validators=[DataRequired()],name="Number of BathRooms")
+    brooms = IntegerField("Number of Bathrooms", validators=[DataRequired()],name="Number of Bathrooms")
     price = DecimalField("Price", validators=[DataRequired()],name="Price",places = 2)
     ptypes = ["House","Mansion","Apartment","Open lot","Commercial"]
     ptype = SelectField("Type", validators=[DataRequired()],name = "Poperty type",choices=ptypes)
